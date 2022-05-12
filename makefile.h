@@ -51,7 +51,7 @@ public:
                         for(auto x : m_variables) {
                             std::cout << "VARIABLE: [" << x.name() << "] [" << x.value() << ']' << '\n';
                         }
-            m_rules = make_rules(m_lines, m_types, m_variables);
+            // m_rules = make_rules(m_lines, m_types, m_variables);
         } else {
             throw std::runtime_error("Target makefile named '" + filename + "' doesn't exist");
         }
