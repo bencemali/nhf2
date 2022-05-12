@@ -15,8 +15,8 @@ std::vector<Variable> extract_variables(std::vector<std::string*> lines, std::ve
                 std::string name = lines[i]->substr(0, lines[i]->find("?="));
                 name = strip(name);
                 bool already_assigned = false;
-                for(auto x : vec) {
-                    if(x.name() == name) {
+                for(auto var : vec) {
+                    if(var.name() == name) {
                         already_assigned = true;
                     }
                 }

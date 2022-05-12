@@ -26,6 +26,8 @@ public:
     }
 };
 
+std::string strip(std::string&);
+
 std::vector<Variable> extract_variables(std::vector<std::string*>, std::vector<LineType>);
 
 #endif //VARIABLE_H

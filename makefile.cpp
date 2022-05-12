@@ -1,11 +1,6 @@
 #include "makefile.h"
 #include <fstream>
 
-bool file_exists(const std::string& filename) {
-    struct stat buffer;
-    return (stat(filename.c_str(), &buffer) == 0);
-}
-
 std::vector<std::string*> read_file(const std::string& filename) {
     std::ifstream file_stream(filename.c_str());
     if(!file_stream.is_open()) {

@@ -1,8 +1,10 @@
 #ifndef MAKEFILE_H
 #define MAKEFILE_H
+
 /////////////////////
 #include <iostream>
 /////////////////////
+
 #include <vector>
 #include <string>
 #include <sys/stat.h>
@@ -10,8 +12,7 @@
 #include "rule.h"
 #include "variable.h"
 #include "type.h"
-
-bool file_exists(const std::string& filename);
+#include "fileinfo.h"
 
 std::vector<std::string*> read_file(const std::string& filename);
 
@@ -23,14 +24,14 @@ class Makefile {
     std::vector<Rule*> m_rules; //TODO: Add to UML
 public:
     Makefile(const std::string& filename = "Makefile") {
-        if(file_exists(filename)) {
+        if(info::exists(filename)) {
             m_lines = read_file(filename);
-                        for(auto x : m_lines) {
-                            std::cout << *x << '\n';
+                        for(auto line : m_lines) {
+                            std::cout << *line << '\n';
                         }
             m_types = type(m_lines);
-                        for(auto x : m_types) {
-                            switch(x) {
+                        for(auto type : m_types) {
+                            switch(type) {
                                 case comment:
                                     std::cout << "comment" << '\n';
                                     break;
@@ -48,10 +49,14 @@ public:
                             }
                         }
             m_variables = extract_variables(m_lines, m_types);
-                        for(auto x : m_variables) {
-                            std::cout << "VARIABLE: [" << x.name() << "] [" << x.value() << ']' << '\n';
+                        for(auto variable : m_variables) {
+                            std::cout << "VARIABLE: [" << variable.name() << "] [" << variable.value() << ']' << '\n';
                         }
-            // m_rules = make_rules(m_lines, m_types, m_variables);
+            //m_rules = make_rules(m_lines, m_types, m_variables);
+            for(auto line : m_lines) {
+                substitute(line, m_variables);
+                std::cout << ">> " << *line << '\n';
+            }
         } else {
             throw std::runtime_error("Target makefile named '" + filename + "' doesn't exist");
         }
@@ -60,11 +65,11 @@ public:
     std::vector<Rule*> rules() const;
 
     virtual ~Makefile() {
-        for(auto x : m_lines) {
-            delete x;
+        for(auto line : m_lines) {
+            delete line;
         }
-        for(auto x : m_rules) {
-            delete x;
+        for(auto rule : m_rules) {
+            delete rule;
         }
     }
 };

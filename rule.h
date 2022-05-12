@@ -2,12 +2,12 @@
 #define RULE_H
 #include <vector>
 #include <string>
+#include <stdexcept>
 #include "target.h"
 #include "recipe.h"
 #include "type.h"
 #include "variable.h"
 
-/// Class 
 class Rule {
     Target m_target;
     std::vector<std::string> m_dependencies;
@@ -35,6 +35,8 @@ public:
         m_recipe.execute();
     }
 };
+
+void substitute(std::string*, std::vector<Variable>);
 
 std::vector<Rule*> make_rules(std::vector<std::string*> lines, std::vector<LineType> types, std::vector<Variable> variables);
 
