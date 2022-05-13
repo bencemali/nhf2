@@ -31,7 +31,7 @@ public:
                         for(auto variable : m_variables) {
                             std::cout << "VARIABLE: [" << variable.name() << "] [" << variable.value() << ']' << '\n';
                         }
-            m_rules = make_rules(m_lines, m_types, m_variables);
+            //m_rules = make_rules(m_lines, m_types, m_variables);
             for(auto line : m_lines) {
                 substitute(line, m_variables);
                 std::cout << ">> " << *line << '\n';

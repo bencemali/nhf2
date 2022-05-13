@@ -1,5 +1,6 @@
 #include "rule.h"
 #include <cstring>
+#include <algorithm>
 
 ////////////
 #include <iostream>
@@ -37,12 +38,40 @@ void substitute(std::string* line, std::vector<Variable>& vars) {
     }
 }
 
-std::vector<Rule*> make_rules(std::vector<std::string*> lines, std::vector<LineType>& types, std::vector<Variable>& variables) {
+std::string ws_collapse(std::string str) {
+    str = strip(str);
+    std::string buffer = "";
+    bool after_ws = false;
+    for(auto it = str.begin(); it != str.end(); ++it) {
+        if(isspace(*it)) {
+            if(!after_ws) {
+                buffer.push_back(*it);
+            }
+            after_ws = true;
+        } else {
+            buffer.push_back(*it);
+            after_ws = false;
+        }
+    }
+    return buffer;
+}
+
+std::vector<Rule*> make_rules(std::vector<std::string*>& lines, std::vector<LineType>& types, std::vector<Variable>& variables) {
     std::vector<Rule*> vec;
     for(size_t i = 0; i < types.size(); ++i) {
         if(types[i] == rule) {
             substitute(lines[i], variables);
             //TODO: Create Rules from rule type line and add recipe lines without substitution
+            size_t separator_idx = lines[i]->find_first_of(":");
+            //TARGETS
+            std::string targets = lines[i]->substr(0, separator_idx);
+            targets = ws_collapse(targets);
+            //DEPENDENCIES
+            std::string deps = lines[i]->substr(separator_idx + 1);
+            deps = ws_collapse(deps);
+            //COUNT
+            int num_of_targets = 1 + std::count(targets.begin(), targets.end(), ' ')
+                                   + std::count(targets.begin(), targets.end(), '\t');
         }
     }
     return vec;

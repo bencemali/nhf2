@@ -38,6 +38,6 @@ public:
 
 void substitute(std::string*, std::vector<Variable>&);
 
-std::vector<Rule*> make_rules(std::vector<std::string*> lines, std::vector<LineType>&, std::vector<Variable>&);
+std::vector<Rule*> make_rules(std::vector<std::string*>& lines, std::vector<LineType>&, std::vector<Variable>&);
 
 #endif //RULE_H
