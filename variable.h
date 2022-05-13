@@ -4,9 +4,8 @@
 #include <string>
 #include "type.h"
 
-/////
+//placeholder
 #include <iostream>
-/////
 
 class Variable {
     std::string m_name;

@@ -11,7 +11,7 @@ public:
         m_lines = lines;
     }
 
-    void substitute(const std::string& target_name, std::vector<std::string>& dependencies);
+    void substitute(const std::string& target_name, const std::vector<std::string>& dependencies) const;
 
     void execute() const;
 };

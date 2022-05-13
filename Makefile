@@ -4,10 +4,10 @@ SHELL = /bin/sh
 CXXFLAGS = -Wall -pedantic -Wextra -Werror -g -Og -I. -I./include/
 LDFLAGS = -g -Og
 
-BINDIR = ./bin
-OBJDIR = ./obj
 HEADDIR = .
 SRCDIR = .
+OBJDIR = ./obj
+BINDIR = ./bin
 
 TARGET = $(BINDIR)/makeclone
 HEADS = $(wildcard $(HEADDIR)/*.h $(HEADDIR)/*.hpp)
@@ -20,7 +20,7 @@ $(TARGET): $(OBJS) | $(BINDIR)
 $(OBJDIR)/%.o: $(SRCDIR)/%.cpp $(HEADS) | $(OBJDIR)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
-.PHONY: $(BINDIR) $(OBJDIR) clean run
+.PHONY: $(BINDIR) $(OBJDIR) clean run echo
 
 $(BINDIR) $(OBJDIR):
 	@mkdir -p $@
@@ -30,4 +30,7 @@ clean:
 
 run: $(TARGET)
 	$(TARGET)
+
+echo:
+	@echo $(foreach var, $(.VARIABLES), $(info $(var) = $($(var)))) # | grep ...
 

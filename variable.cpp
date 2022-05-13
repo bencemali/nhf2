@@ -2,8 +2,11 @@
 
 std::string strip(std::string& str) {
     std::string stripped;
-    int begin = str.find_first_not_of(" \t\n\r\f\v");
-    int end = str.find_last_not_of(" \t\n\r\f\v");
+    auto begin = str.find_first_not_of(" \t\n\r\f\v");
+    auto end = str.find_last_not_of(" \t\n\r\f\v");
+    if(begin == std::string::npos || end == std::string::npos) {
+        return str;
+    }
     return stripped = str.substr(begin, end - begin + 1);
 }
 

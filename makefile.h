@@ -1,9 +1,8 @@
 #ifndef MAKEFILE_H
 #define MAKEFILE_H
 
-/////////////////////
+//placeholder
 #include <iostream>
-/////////////////////
 
 #include <vector>
 #include <string>
@@ -27,14 +26,35 @@ public:
         if(info::exists(filename)) {
             m_lines = read_file(filename);
             m_types = type(m_lines);
+            for(auto type : m_types) {
+                switch(type) {
+                    case comment:
+                        std::cout << "comment" << '\n';
+                        break;
+                    case recipe:
+                        std::cout << "recipe" << '\n';
+                        break;
+                    case rule:
+                        std::cout << "rule" << '\n';
+                        break;
+                    case assignment:
+                        std::cout << "assignment" << '\n';
+                        break;
+                    case neutral:
+                        std::cout << "neutral" << '\n';
+                        break;
+                }
+            }
             m_variables = extract_variables(m_lines, m_types);
                         for(auto variable : m_variables) {
                             std::cout << "VARIABLE: [" << variable.name() << "] [" << variable.value() << ']' << '\n';
                         }
-            //m_rules = make_rules(m_lines, m_types, m_variables);
             for(auto line : m_lines) {
                 substitute(line, m_variables);
-                std::cout << ">> " << *line << '\n';
+            }
+            m_rules = make_rules(m_lines, m_types, m_variables);
+            for(auto rule : m_rules) {
+                rule->execute();
             }
         } else {
             throw std::runtime_error("Target makefile named '" + filename + "' doesn't exist");
