@@ -26,29 +26,7 @@ public:
         if(info::exists(filename)) {
             m_lines = read_file(filename);
             m_types = type(m_lines);
-            for(auto type : m_types) {
-                switch(type) {
-                    case comment:
-                        std::cout << "comment" << '\n';
-                        break;
-                    case recipe:
-                        std::cout << "recipe" << '\n';
-                        break;
-                    case rule:
-                        std::cout << "rule" << '\n';
-                        break;
-                    case assignment:
-                        std::cout << "assignment" << '\n';
-                        break;
-                    case neutral:
-                        std::cout << "neutral" << '\n';
-                        break;
-                }
-            }
             m_variables = extract_variables(m_lines, m_types);
-                        for(auto variable : m_variables) {
-                            std::cout << "VARIABLE: [" << variable.name() << "] [" << variable.value() << ']' << '\n';
-                        }
             for(auto line : m_lines) {
                 substitute(line, m_variables);
             }

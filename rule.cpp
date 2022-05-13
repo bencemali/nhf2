@@ -2,9 +2,6 @@
 #include <cstring>
 #include <algorithm>
 
-//placeholder
-#include <iostream>
-
 void substitute(std::string* line, std::vector<Variable>& vars) {
     while(line->find("$(") != std::string::npos) {
         size_t sub_str_start = line->find("$(");
@@ -76,7 +73,6 @@ std::vector<Rule*> make_rules(std::vector<std::string*>& lines, std::vector<Line
     for(size_t i = 0; i < types.size(); ++i) {
         if(types[i] == rule) {
             substitute(lines[i], variables);
-            //TODO: Create Rules from rule type line and add recipe lines without substitution
             size_t separator_idx = lines[i]->find_first_of(":");
             if(separator_idx == std::string::npos) {
                 throw std::runtime_error("PROBLEMA");
@@ -88,11 +84,6 @@ std::vector<Rule*> make_rules(std::vector<std::string*>& lines, std::vector<Line
             std::string deps = lines[i]->substr(separator_idx + 1);
             deps = ws_collapse(deps);
             //COUNT
-            int num_of_targets = 1 + std::count(targets.begin(), targets.end(), ' ')
-                                   + std::count(targets.begin(), targets.end(), '\t');
-            //placeholder
-            num_of_targets = num_of_targets + 0;
-            //TODO: Get recipe and assign to every target's rule
             std::vector<std::string> target_names = parse(targets);
             std::vector<std::string> dep_names = parse(deps);
             std::vector<std::string*> recipe_lines;
