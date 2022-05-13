@@ -4,6 +4,10 @@
 #include <string>
 #include "type.h"
 
+/////
+#include <iostream>
+/////
+
 class Variable {
     std::string m_name;
     std::string m_value;
@@ -22,7 +26,8 @@ public:
     }
 
     void operator+=(const std::string& addition) {
-        m_value += ' ' + addition;
+        m_value += " ";
+        m_value += addition;
     }
 };
 

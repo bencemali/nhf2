@@ -11,9 +11,7 @@ public:
         m_lines = lines;
     }
 
-    void operator+=(std::string* line) {
-        m_lines.push_back(line);
-    }
+    void substitute(const std::string& target_name, std::vector<std::string>& dependencies);
 
     void execute() const;
 };

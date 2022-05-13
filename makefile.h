@@ -26,33 +26,12 @@ public:
     Makefile(const std::string& filename = "Makefile") {
         if(info::exists(filename)) {
             m_lines = read_file(filename);
-                        for(auto line : m_lines) {
-                            std::cout << *line << '\n';
-                        }
             m_types = type(m_lines);
-                        for(auto type : m_types) {
-                            switch(type) {
-                                case comment:
-                                    std::cout << "comment" << '\n';
-                                    break;
-                                case recipe:
-                                    std::cout << "recipe" << '\n';
-                                    break;
-                                case rule:
-                                    std::cout << "rule" << '\n';
-                                    break;
-                                case assignment:
-                                    std::cout << "assignment" << '\n';
-                                    break;
-                                default:
-                                    std::cout << "neutral" << '\n';
-                            }
-                        }
             m_variables = extract_variables(m_lines, m_types);
                         for(auto variable : m_variables) {
                             std::cout << "VARIABLE: [" << variable.name() << "] [" << variable.value() << ']' << '\n';
                         }
-            //m_rules = make_rules(m_lines, m_types, m_variables);
+            m_rules = make_rules(m_lines, m_types, m_variables);
             for(auto line : m_lines) {
                 substitute(line, m_variables);
                 std::cout << ">> " << *line << '\n';

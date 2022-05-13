@@ -45,7 +45,7 @@ std::vector<Variable> extract_variables(std::vector<std::string*> lines, std::ve
                     Variable neu_var(name, value);
                     vec.push_back(neu_var);
                 } else {
-                    vec[i] += value;
+                    vec[idx] += value;
                 }
             } else if(lines[i]->find("=") != std::string::npos) {
                 std::string name = lines[i]->substr(0, lines[i]->find("="));

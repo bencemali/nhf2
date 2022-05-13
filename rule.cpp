@@ -5,7 +5,7 @@
 #include <iostream>
 ////////////
 
-void substitute(std::string* line, std::vector<Variable> vars) {
+void substitute(std::string* line, std::vector<Variable>& vars) {
     while(line->find("$(") != std::string::npos) {
         size_t sub_str_start = line->find("$(");
         size_t name_start = sub_str_start + 2;
@@ -37,11 +37,12 @@ void substitute(std::string* line, std::vector<Variable> vars) {
     }
 }
 
-std::vector<Rule*> make_rules(std::vector<std::string*> lines, std::vector<LineType> types, std::vector<Variable> variables) {
+std::vector<Rule*> make_rules(std::vector<std::string*> lines, std::vector<LineType>& types, std::vector<Variable>& variables) {
     std::vector<Rule*> vec;
     for(size_t i = 0; i < types.size(); ++i) {
         if(types[i] == rule) {
             substitute(lines[i], variables);
+            //TODO: Create Rules from rule type line and add recipe lines without substitution
         }
     }
     return vec;
