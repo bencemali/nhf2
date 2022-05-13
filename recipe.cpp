@@ -2,7 +2,9 @@
 #include <iostream>
 
 void Recipe::substitute(const std::string& target_name, std::vector<std::string>& dependencies) {
-    //TODO: Substitute $@, $^, $< in recipe
+    //TODO: Substitute $@, $^, $< in Recipe
+    auto str = target_name;
+    auto tmp = dependencies;
 }
 
 void Recipe::execute() const {

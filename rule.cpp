@@ -72,6 +72,7 @@ std::vector<Rule*> make_rules(std::vector<std::string*>& lines, std::vector<Line
             //COUNT
             int num_of_targets = 1 + std::count(targets.begin(), targets.end(), ' ')
                                    + std::count(targets.begin(), targets.end(), '\t');
+            num_of_targets = num_of_targets;
         }
     }
     return vec;
