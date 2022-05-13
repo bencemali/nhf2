@@ -32,9 +32,7 @@ public:
     }
 
     void execute() const {
-        //std::string name = m_target.name();
-        //m_recipe.substitute(m_target.name(), m_dependencies);
-        m_recipe.execute();
+        m_recipe.execute(m_target.name(), m_dependencies);
     }
 };
 

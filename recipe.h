@@ -11,9 +11,9 @@ public:
         m_lines = lines;
     }
 
-    void substitute(const std::string& target_name, const std::vector<std::string>& dependencies) const;
-
-    void execute() const;
+    void execute(const std::string&, const std::vector<std::string>&) const;
 };
+
+std::string substitute(std::string* const str_ptr, const std::string&, const std::vector<std::string>&);
 
 #endif //RECIPE_H
