@@ -7,8 +7,12 @@
 class Recipe {
     std::vector<std::string*> m_lines;
 public:
-    Recipe(const std::vector<std::string*> lines) {
-        m_lines = lines;
+    Recipe(const std::vector<std::string*> lines)
+        :m_lines(lines)
+    {}
+
+    std::vector<std::string*> lines() const {
+        return m_lines;
     }
 
     void execute(const std::string&, const std::vector<std::string>&) const;
@@ -17,3 +21,4 @@ public:
 std::string substitute(std::string* const str_ptr, const std::string&, const std::vector<std::string>&);
 
 #endif //RECIPE_H
+

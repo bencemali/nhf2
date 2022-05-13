@@ -1,8 +1,9 @@
 #ifndef MAKEFILE_H
 #define MAKEFILE_H
 
-//placeholder
+//temporary
 #include <iostream>
+//
 
 #include <vector>
 #include <string>
@@ -31,15 +32,21 @@ public:
                 substitute(line, m_variables);
             }
             m_rules = make_rules(m_lines, m_types, m_variables);
+
+            //temporary
             for(auto rule : m_rules) {
                 rule->execute();
             }
+            //
+
         } else {
             throw std::runtime_error("Target makefile named '" + filename + "' doesn't exist");
         }
     }
 
-    std::vector<Rule*> rules() const;
+    std::vector<Rule*> rules() const {
+        return m_rules;
+    }
 
     virtual ~Makefile() {
         for(auto line : m_lines) {
@@ -52,3 +59,4 @@ public:
 };
 
 #endif //MAKEFILE_H
+

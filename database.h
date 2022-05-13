@@ -7,13 +7,18 @@
 class Database {
     std::vector<Rule*> m_rules;
 public:
-    Database(std::vector<Rule*> rules)
+    Database(std::vector<Rule*>& rules)
         : m_rules(rules)
     {}
 
-    Rule& operator[](const std::string& name) const;
+    Rule operator[](const std::string&) const;
 
-    const char* build(const std::string& target) const;
+    std::string build(const std::string&) const; //TODO: Change in UML to std::string
 };
 
+bool matches(const std::string&, const std::string&);
+
+Rule temporary_rule(Rule*, const std::string&);
+
 #endif //DATABASE_H
+
