@@ -1,13 +1,16 @@
 #include "variable.h"
 
 std::string strip(std::string& str) {
-    std::string stripped;
-    auto begin = str.find_first_not_of(" \t\n\r\f\v");
-    auto end = str.find_last_not_of(" \t\n\r\f\v");
-    if(begin == std::string::npos || end == std::string::npos) {
-        return str;
+    if(str.size() > 0) {
+        std::string stripped;
+        auto begin = str.find_first_not_of(" \t\n\r\f\v");
+        auto end = str.find_last_not_of(" \t\n\r\f\v");
+        if(begin == std::string::npos || end == std::string::npos) {
+            return str;
+        }
+        return stripped = str.substr(begin, end - begin + 1);
     }
-    return stripped = str.substr(begin, end - begin + 1);
+    return str;
 }
 
 std::vector<Variable> extract_variables(std::vector<std::string*> lines, std::vector<LineType> types) {

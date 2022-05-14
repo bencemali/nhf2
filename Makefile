@@ -1,7 +1,7 @@
 SHELL = /bin/sh
  CXX = g++ -std=c++11
 #CXX = clang++ -std=c++11
-CXXFLAGS = -Wall -pedantic -Wextra -Werror -g -Og -I. -I./include/
+CXXFLAGS = -Wall -pedantic -Wextra -Werror -g -Og -I. -I$(HEADDIR)
 LDFLAGS = -g -Og
 
 HEADDIR = .

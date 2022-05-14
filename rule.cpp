@@ -90,6 +90,7 @@ std::vector<Rule*> make_rules(std::vector<std::string*>& lines, std::vector<Line
             std::vector<std::string> dep_names = parse(deps);
             std::vector<std::string*> recipe_lines;
             for(size_t j = i + 1; types[j] == recipe; ++j) {
+                std::string line = strip(*lines[j]);
                 recipe_lines.push_back(lines[j]);
             }
             for(auto target_name : target_names) {
