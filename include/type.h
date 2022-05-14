@@ -4,6 +4,7 @@
 #include <vector>
 #include <string>
 
+/// Enum for a Makefile's lines' types
 enum LineType {
     comment,
     recipe,
@@ -12,7 +13,9 @@ enum LineType {
     neutral
 };
 
-/// Function to determine the lines' types
+/// Function to determine a Makefile's lines' types
+/// @param lines - the vector of the lines
+/// @return a vector of the types
 std::vector<LineType> type(std::vector<std::string*> lines);
 
 #endif //TYPE_H

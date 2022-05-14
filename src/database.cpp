@@ -19,14 +19,14 @@ bool matches(const std::string& pattern_candidate, const std::string& name) {
 Rule temporary_rule(Rule* pattern_rule, const std::string& name) {
     size_t pos = name.find(pattern_rule->name()[1]);
     std::string name_without_pattern = name.substr(0, pos);
-    std::vector<std::string> dependencies = pattern_rule->m_dependencies;
+    std::vector<std::string> dependencies = pattern_rule->deps();
     for(size_t i = 0; i < dependencies.size(); ++i) {
         if(dependencies[i].find("%") != std::string::npos) {
             size_t pos2 = dependencies[i].find("%");
             dependencies[i].replace(pos2, 1, name_without_pattern);
         }
     }
-    Rule rule(name, dependencies, pattern_rule->m_recipe.lines());
+    Rule rule(name, dependencies, pattern_rule->lines());
     return rule;
 }
 
