@@ -10,7 +10,11 @@ std::string substitute(std::string* const str_ptr, const std::string& target_nam
     }
     while(ret.find("$<") != std::string::npos) {
         size_t pos = ret.find("$<");
-        ret.replace(pos, 2, dependencies[0]);
+        if(dependencies.size() > 0) {
+            ret.replace(pos, 2, dependencies[0]);
+        } else {
+            ret.replace(pos, 2, "");
+        }
     }
     while(ret.find("$^") != std::string::npos) {
         std::string all_deps = "";
@@ -31,6 +35,6 @@ void Recipe::execute(const std::string& target_name, const std::vector<std::stri
         std::string subst_line = substitute(line_ptr, target_name, dependencies);
         subst_line = strip(subst_line);
         std::cout << subst_line << '\n';
-        system(subst_line.c_str());
+        //system(subst_line.c_str());
     }
 }

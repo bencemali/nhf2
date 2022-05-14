@@ -41,14 +41,11 @@ Rule Database::operator[](const std::string& name) const {
             return temporary_rule(candidate, name);
         }
     }
-    throw std::runtime_error("No rule for target " + name);
+    throw std::runtime_error("No rule for target '" + name + "'");
 }
 
 void Database::build_helper(const std::string& target_name, std::vector<std::string>& already_built) const {
     already_built.push_back(target_name); //Prevent loops by keeping a list of already built targets
-
-    //temporary
-    std::cout << "build('" + target_name + "')" << std::endl;
 
     Rule target = (*this)[target_name];
 
@@ -61,6 +58,10 @@ void Database::build_helper(const std::string& target_name, std::vector<std::str
         }
         if(dep_name != target_name && !dep_already_built) {
             build_helper(dep_name, already_built);
+        } else if(dep_name == target_name) {
+            std::cout << "Target '" << target_name << "' is it's own prerequisite. Breaking loop." << '\n';
+        } else if(dep_already_built) {
+            std::cout << "Target '" << target_name << "' is in a loop. Breaking loop." << '\n';
         }
     }
 

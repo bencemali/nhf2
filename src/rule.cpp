@@ -5,6 +5,8 @@
 void substitute(std::string* line, std::vector<Variable>& vars) {
     while(line->find("$(") != std::string::npos) {
         size_t sub_str_start = line->find("$(");
+        if(line->size() >= sub_str_start + 2) {
+        }
         size_t name_start = sub_str_start + 2;
         size_t sub_str_end = name_start + 1;
         do {
@@ -14,7 +16,7 @@ void substitute(std::string* line, std::vector<Variable>& vars) {
             ++sub_str_end;
         } while(sub_str_end < line->size());
         if((*line)[sub_str_end] != ')') {
-            throw std::runtime_error("Missing ')' separator");
+            std::cout << "Missing ')' separator" << '\n';
         }
         std::string variable_name;
         for(size_t i = name_start; line->c_str()[i] != ')'; ++i) {
@@ -31,7 +33,6 @@ void substitute(std::string* line, std::vector<Variable>& vars) {
         if(!var_found) {
             line->replace(sub_str_start, sub_str_end - sub_str_start + 1, "");
         }
-        break;
     }
 }
 
@@ -95,11 +96,13 @@ std::vector<Rule*> make_rules(std::vector<std::string*>& lines, std::vector<Line
 
             for(auto target_name : target_names) {
                 if(target_name != "") {
-                    for(auto it = vec.begin(); it != vec.end(); ++it) {
+                    for(auto it = vec.begin(); it != vec.end();) {
                         if((*it)->name() == target_name) {
-                            std::cerr << "Warning: Overriding recipe for target: " << target_name << std::endl;
+                            std::cout << "Overriding rule for '" << target_name << "'" << '\n';
                             delete *it;
                             vec.erase(it);
+                        } else {
+                            ++it;
                         }
                     }
 

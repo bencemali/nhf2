@@ -29,7 +29,7 @@ public:
     /// Rule constructor
     /// @param target - name of the target
     /// @param deps - list of the dependencies
-    /// @param lines - the Recipe
+    /// @param recipe - the Recipe
     Rule(const std::string& target, std::vector<std::string> deps, Recipe& recipe)
         : m_target(target)
         , m_dependencies(deps)
