@@ -5,10 +5,6 @@
 #include <string>
 #include "type.h"
 
-//temporary
-#include <iostream>
-//
-
 class Variable {
     std::string m_name;
     std::string m_value;

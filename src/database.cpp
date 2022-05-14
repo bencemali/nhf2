@@ -20,10 +20,10 @@ Rule temporary_rule(Rule* pattern_rule, const std::string& name) {
     size_t pos = name.find(pattern_rule->name()[1]);
     std::string name_without_pattern = name.substr(0, pos);
     std::vector<std::string> dependencies = pattern_rule->m_dependencies;
-    for(auto dep : dependencies) {
-        if(dep.find("%") != std::string::npos) {
-            size_t pos2 = dep.find("%");
-            dep.replace(pos2, 1, name_without_pattern);
+    for(size_t i = 0; i < dependencies.size(); ++i) {
+        if(dependencies[i].find("%") != std::string::npos) {
+            size_t pos2 = dependencies[i].find("%");
+            dependencies[i].replace(pos2, 1, name_without_pattern);
         }
     }
     Rule rule(name, dependencies, pattern_rule->m_recipe.lines());
@@ -44,12 +44,26 @@ Rule Database::operator[](const std::string& name) const {
     throw std::runtime_error("No rule for target " + name);
 }
 
-void Database::build(const std::string& target_name) const {
+void Database::build_helper(const std::string& target_name, std::vector<std::string>& already_built) const {
+    already_built.push_back(target_name); //Prevent loops by keeping a list of already built targets
+
+    //temporary
     std::cout << "build('" + target_name + "')" << std::endl;
+
     Rule target = (*this)[target_name];
+
     for(auto dep_name : target.deps()) {
-        build(dep_name);
+        bool dep_already_built = false; //Prevent loops
+        for(auto built : already_built) {
+            if(built == dep_name) {
+                dep_already_built = true;
+            }
+        }
+        if(dep_name != target_name && !dep_already_built) {
+            build_helper(dep_name, already_built);
+        }
     }
+
     if(!target.exists()) {
         target.execute();
     } else {
@@ -64,4 +78,11 @@ void Database::build(const std::string& target_name) const {
             target.execute();
         }
     }
+}
+
+void Database::build(const std::string& target_name) const {
+    std::vector<std::string> already_built;
+    already_built.push_back(target_name);
+
+    build_helper(target_name, already_built);
 }

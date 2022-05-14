@@ -7,6 +7,7 @@
 /// Class responsible for building the targets
 class Database {
     std::vector<Rule*> m_rules;
+    void build_helper(const std::string&, std::vector<std::string>&) const;
 public:
     Database(std::vector<Rule*> rules)
         : m_rules(rules)
