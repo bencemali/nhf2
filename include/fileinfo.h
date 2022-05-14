@@ -1,3 +1,4 @@
+#include "memtrace.h"
 #include <sys/stat.h>
 #include <string>
 #include <stdexcept>

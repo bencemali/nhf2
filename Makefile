@@ -1,8 +1,9 @@
+#Warning: Ironically the program cannot yet interpret it's own build Makefile
 SHELL = /bin/sh
  CXX = g++ -std=c++11
 #CXX = clang++ -std=c++11
-CXXFLAGS = -Wall -pedantic -Wextra -Werror -g -Og -I. -I$(HEADDIR)
-LDFLAGS = -g -Og
+CXXFLAGS = -DMEMTRACE -Wall -pedantic -Wextra -Werror -g -Og -I. -I$(HEADDIR)
+LDFLAGS = -DMEMTRACE -g -Og
 
 HEADDIR = ./include
 SRCDIR = ./src

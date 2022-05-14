@@ -1,5 +1,6 @@
 #ifndef TARGET_H
 #define TARGET_H
+#include "memtrace.h"
 #include <string>
 #include <ctime>
 #include "fileinfo.h"
