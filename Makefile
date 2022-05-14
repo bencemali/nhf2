@@ -4,8 +4,8 @@ SHELL = /bin/sh
 CXXFLAGS = -Wall -pedantic -Wextra -Werror -g -Og -I. -I$(HEADDIR)
 LDFLAGS = -g -Og
 
-HEADDIR = .
-SRCDIR = .
+HEADDIR = ./include
+SRCDIR = ./src
 OBJDIR = ./obj
 BINDIR = ./bin
 

@@ -1,0 +1,8 @@
+-Wall
+-pedantic
+-Wextra
+-Werror
+-g
+-Og
+-I.
+-I./include
