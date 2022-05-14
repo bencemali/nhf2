@@ -55,16 +55,18 @@ std::string ws_collapse(std::string str) {
 
 std::vector<std::string> parse(const std::string& str) {
     std::vector<std::string> vec;
-    std::string temp = "";
-    for(auto c : str) {
-        if(!isspace(c)) {
-            temp += c;
-        } else {
-            vec.push_back(temp);
-            temp = "";
+    if(str.size() > 0) {
+        std::string temp = "";
+        for(auto c : str) {
+            if(!isspace(c)) {
+                temp += c;
+            } else {
+                vec.push_back(temp);
+                temp = "";
+            }
         }
+        vec.push_back(temp);
     }
-    vec.push_back(temp);
     return vec;
 }
 

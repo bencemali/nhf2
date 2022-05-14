@@ -28,7 +28,7 @@ std::string substitute(std::string* const str_ptr, const std::string& target_nam
 void Recipe::execute(const std::string& target_name, const std::vector<std::string>& dependencies) const {
     for(auto line_ptr : m_lines) {
         std::string subst_line = substitute(line_ptr, target_name, dependencies);
-        std::cout << subst_line << '\n';
+        std::cout << "OUTPUT: "<< subst_line << '\n';
         //system(subst_line.c_str());
     }
 }

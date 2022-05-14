@@ -32,13 +32,6 @@ public:
                 substitute(line, m_variables);
             }
             m_rules = make_rules(m_lines, m_types, m_variables);
-
-            //temporary
-            for(auto rule : m_rules) {
-                rule->execute();
-            }
-            //
-
         } else {
             throw std::runtime_error("Target makefile named '" + filename + "' doesn't exist");
         }

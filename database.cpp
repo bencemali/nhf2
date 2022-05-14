@@ -44,10 +44,24 @@ Rule Database::operator[](const std::string& name) const {
     throw std::runtime_error("No rule for target " + name);
 }
 
-std::string Database::build(const std::string& target_name) const {
+void Database::build(const std::string& target_name) const {
+    std::cout << "build('" + target_name + "')" << std::endl;
     Rule target = (*this)[target_name];
-    for(auto dep : target.deps()) {
-        (*this)[dep].execute();
+    for(auto dep_name : target.deps()) {
+        build(dep_name);
     }
-    //TODO: Finish Database
+    if(!target.exists()) {
+        target.execute();
+    } else {
+        bool build_needed = false;
+        for(auto dep_name : target.deps()) {
+            if(target.modtime() < (*this)[dep_name].modtime()) {
+                build_needed = true;
+                break;
+            }
+        }
+        if(build_needed) {
+            target.execute();
+        }
+    }
 }
