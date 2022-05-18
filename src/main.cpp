@@ -1,7 +1,6 @@
 #include <fstream>
 #include <sstream>
 #include <iostream>
-#include "gtest_lite.h"
 #include "makefile.h"
 #include "database.h"
 #include "recipe.h"
@@ -19,9 +18,10 @@ int main(int argc, char* argv[]) {
         if(argc == 1) { // If there's no input given, do the test
             test();
         } else { // If there's input, use it as the target
-            Makefile mf("_Makefile");
-            Database db(mf.rules());
-            db.build(argv[1]);
+        argc = argc + 0;
+        Makefile mf("makefile");
+        Database db(mf.rules());
+        db.build(argv[1]);
         }
     }
     catch(std::exception& err) {
@@ -37,6 +37,8 @@ void test() {
     exception_test();
     /* Build compulsion because of modtime differences
        cannot be tested without system calls */
+    /* To test building because of editing a prerequisite
+       edit the Recipe::execute() to make system calls */
 }
 
 void variable_test() {

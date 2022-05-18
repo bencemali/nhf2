@@ -1,6 +1,6 @@
 #ifndef DATABASE_H
 #define DATABASE_H
-#include "memtrace.h"
+//#include "memtrace.h"
 #include <vector>
 #include "rule.h"
 
@@ -41,7 +41,7 @@ public:
      * It is needed to avoid getting into a loop.
      */
     /// @param target_name - name of the top level build target
-    void build(const std::string& target_name) const; //TODO: Change in UML to std::string
+    void build(const std::string& target_name) const;
 };
 
 /// Function to test if a target name matches a pattern (ie. %)

@@ -1,0 +1,13 @@
+prereq:
+
+prereq:
+	recipe p
+	target: $@
+	first prerequisite: $<
+	all prerequisites: $^
+
+loop1: loop1
+	recipe l
+	target: $@
+	first prerequisite: $<
+	all prerequisites: $^

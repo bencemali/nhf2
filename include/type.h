@@ -1,6 +1,6 @@
 #ifndef TYPE_H
 #define TYPE_H
-#include "memtrace.h"
+//#include "memtrace.h"
 #include <vector>
 #include <string>
 

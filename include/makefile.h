@@ -1,6 +1,6 @@
 #ifndef MAKEFILE_H
 #define MAKEFILE_H
-#include "memtrace.h"
+//#include "memtrace.h"
 #include <vector>
 #include <string>
 #include <sys/stat.h>
@@ -26,7 +26,6 @@ class Makefile {
     std::vector<LineType> m_types; ///< Vector of line types, one for each line
     std::vector<Variable> m_variables; ///< Vector of variables created from assignments
     std::vector<Rule*> m_rules; ///< Vector of the created Rules (allocated and freed by Makefile)
-                                //TODO: Add to UML
 public:
 
     /// Constructor for Makefile

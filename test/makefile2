@@ -1,0 +1,24 @@
+VAR1 = target1
+VAR1 += target2
+VAR1 += target3
+VAR1 ?= target4
+VAR2 = target5
+VAR3 += target6
+
+$(VAR3): $(VAR2)
+	recipe 1
+	target: $@
+	first prerequisite: $<
+	all prerequisites: $^
+
+$(VAR1): target6
+	recipe 2
+	target: $@
+	first prerequisite: $<
+	all prerequisites: $^
+
+target5:
+	recipe 3
+	target: $@
+	first prerequisite: $<
+	all prerequisites: $^

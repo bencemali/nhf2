@@ -1,0 +1,17 @@
+ROOT = looproot
+CHILDREN = loopchild1
+CHILDREN += loopchild2
+
+$(ROOT): $(CHILDREN)
+	recipe r
+	target: $@
+	first prerequisite: $<
+	all prerequisites: $^
+
+
+
+$(CHILDREN): $(CHILDREN)
+	recipe c
+	target: $@
+	first prerequisite: $<
+	all prerequisites: $^

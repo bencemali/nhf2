@@ -1,0 +1,18 @@
+%.a: %.b prerequisite
+	recipe a
+	target: $@
+	first prerequisite: $<
+	all prerequisites: $^
+
+prerequisite:
+	recipe p
+	target: $@
+	first prerequisite: $<
+	all prerequisites: $^
+
+%.b:
+	recipe b
+	target: $@
+	first prerequisite: $<
+	all prerequisites: $^
+

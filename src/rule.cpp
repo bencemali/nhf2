@@ -1,4 +1,5 @@
 #include "rule.h"
+#include <iostream>
 #include <cstring>
 #include <algorithm>
 
@@ -90,7 +91,7 @@ std::vector<Rule*> make_rules(std::vector<std::string*>& lines, std::vector<Line
             std::vector<std::string> dep_names = parse(deps);
 
             std::vector<std::string*> recipe_lines;
-            for(size_t j = i + 1; types[j] == recipe; ++j) {
+            for(size_t j = i + 1; j != types.size() && types[j] == recipe; ++j) {
                 recipe_lines.push_back(lines[j]);
             }
 

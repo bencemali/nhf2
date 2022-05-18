@@ -1,4 +1,5 @@
 #include "database.h"
+#include <iostream>
 
 bool matches(const std::string& pattern_candidate, const std::string& name) {
     if(pattern_candidate.size() <= 1 || pattern_candidate[0] != '%') {
