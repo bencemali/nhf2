@@ -1,6 +1,5 @@
 #ifndef RULE_H
 #define RULE_H
-//#include "memtrace.h"
 #include <vector>
 #include <string>
 #include <stdexcept>

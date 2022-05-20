@@ -1,6 +1,5 @@
 #ifndef TARGET_H
 #define TARGET_H
-//#include "memtrace.h"
 #include <string>
 #include <ctime>
 #include "fileinfo.h"
@@ -17,8 +16,14 @@ public:
     Target(const std::string& filename)
         : m_name(filename)
         , m_exists(info::exists(filename))
-        , m_modtime(info::modtime(filename))
-    {}
+        //, m_modtime(info::modtime(filename))
+    {
+        if(m_exists) {
+            m_modtime = info::modtime(m_name);
+        } else {
+            m_modtime = std::time(0);
+        }
+    }
 
     /// Getter for the file's name
     /// @return a const reference to the filename

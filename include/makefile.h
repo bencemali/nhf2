@@ -1,6 +1,5 @@
 #ifndef MAKEFILE_H
 #define MAKEFILE_H
-//#include "memtrace.h"
 #include <vector>
 #include <string>
 #include <sys/stat.h>
