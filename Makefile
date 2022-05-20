@@ -2,8 +2,8 @@
 SHELL = /bin/sh
  CXX = g++ -std=c++17
 #CXX = clang++ -std=c++17
-CXXFLAGS = -DMEMTRACE -Wall -pedantic -Wextra -Werror -g -Og -I. -I$(HEADDIR)
-LDFLAGS = -DMEMTRACE -g -Og
+CXXFLAGS = -Wall -pedantic -Wextra -Werror -g -Og -I. -I$(HEADDIR)
+LDFLAGS = -g -Og
 
 HEADDIR = ./include
 SRCDIR = ./src
