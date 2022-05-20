@@ -1,7 +1,7 @@
 #Warning: Ironically the program cannot yet interpret it's own build Makefile
 SHELL = /bin/sh
- CXX = g++ -std=c++11
-#CXX = clang++ -std=c++11
+ CXX = g++ -std=c++17
+#CXX = clang++ -std=c++17777777
 CXXFLAGS = -DMEMTRACE -Wall -pedantic -Wextra -Werror -g -Og -I. -I$(HEADDIR)
 LDFLAGS = -DMEMTRACE -g -Og
 
@@ -30,7 +30,7 @@ clean:
 	rm -rf $(OBJDIR) $(BINDIR)
 
 run: $(TARGET)
-	$(TARGET)
+	valgrind $(TARGET)
 
 echo:
 	@echo $(foreach var, $(.VARIABLES), $(info $(var) = $($(var)))) # | grep ...
