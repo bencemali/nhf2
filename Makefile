@@ -1,8 +1,8 @@
 #Warning: Ironically the program cannot yet interpret it's own build Makefile
-SHELL = /bin/sh
- CXX = g++ -std=c++17
+SHELL = /bin/bash
+CXX = g++ -std=c++17
 #CXX = clang++ -std=c++17
-CXXFLAGS = -Wall -pedantic -Wextra -Werror -g -Og -I. -I$(HEADDIR)
+CXXFLAGS = -Wall -pedantic -Wextra -Werror -g -O0 -I. -I$(HEADDIR)
 LDFLAGS = -g -Og
 
 HEADDIR = ./include
@@ -12,7 +12,7 @@ BINDIR = ./bin
 
 TARGET = $(BINDIR)/makeclone
 HEADS = $(wildcard $(HEADDIR)/*.h $(HEADDIR)/*.hpp)
-SRCS = $(wildcard $(SRCDIR)/*.cpp)
+SRCS = $(wildcard $(SRCDIR)/*.cpp $(SRCDIR)/*.cc)
 OBJS = $(SRCS:$(SRCDIR)/%.cpp=$(OBJDIR)/%.o)
 
 $(TARGET): $(OBJS) | $(BINDIR)
@@ -30,7 +30,7 @@ clean:
 	rm -rf $(OBJDIR) $(BINDIR)
 
 run: $(TARGET)
-	valgrind $(TARGET)
+	valgrind --tool=memcheck -s --leak-check=full --show-leak-kinds=all $(TARGET)
 
 echo:
 	@echo $(foreach var, $(.VARIABLES), $(info $(var) = $($(var)))) # | grep ...
