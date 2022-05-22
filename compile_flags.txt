@@ -1,9 +1,8 @@
--DMEMTRACE
 -Wall
 -pedantic
 -Wextra
 -Werror
 -g
--Og
+-O0
 -I.
 -I./include
