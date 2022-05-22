@@ -3,7 +3,7 @@ SHELL = /bin/bash
 CXX = g++ -std=c++17
 #CXX = clang++ -std=c++17
 CXXFLAGS = -Wall -pedantic -Wextra -Werror -g -O0 -I. -I$(HEADDIR)
-LDFLAGS = -g -Og
+LDFLAGS = -g -O0
 
 HEADDIR = ./include
 SRCDIR = ./src
@@ -21,7 +21,7 @@ $(TARGET): $(OBJS) | $(BINDIR)
 $(OBJDIR)/%.o: $(SRCDIR)/%.cpp $(HEADS) | $(OBJDIR)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
-.PHONY: $(BINDIR) $(OBJDIR) clean run echo
+.PHONY: $(BINDIR) $(OBJDIR) clean test echo
 
 $(BINDIR) $(OBJDIR):
 	@mkdir -p $@
@@ -29,7 +29,7 @@ $(BINDIR) $(OBJDIR):
 clean:
 	rm -rf $(OBJDIR) $(BINDIR)
 
-run: $(TARGET)
+test: $(TARGET)
 	valgrind --tool=memcheck -s --leak-check=full --show-leak-kinds=all $(TARGET)
 
 echo:
