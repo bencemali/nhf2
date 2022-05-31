@@ -5,4 +5,4 @@
 -g
 -O0
 -I.
--I./include
+-Iinclude

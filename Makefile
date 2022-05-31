@@ -3,12 +3,12 @@ SHELL = /bin/bash
 CXX = g++ -std=c++17
 #CXX = clang++ -std=c++17
 CXXFLAGS = -Wall -pedantic -Wextra -Werror -g -O0 -I. -I$(HEADDIR)
-LDFLAGS = -g -O0
+LDFLAGS =
 
-HEADDIR = ./include
-SRCDIR = ./src
-OBJDIR = ./obj
-BINDIR = ./bin
+HEADDIR = include
+SRCDIR = src
+OBJDIR = obj
+BINDIR = bin
 
 TARGET = $(BINDIR)/makeclone
 HEADS = $(wildcard $(HEADDIR)/*.h $(HEADDIR)/*.hpp)
